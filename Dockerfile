@@ -6,8 +6,8 @@ RUN \
     apt-get update && \
     apt-get install -y build-essential curl git python-pip python-dev python-software-properties software-properties-common
 
-# Install virtual env
-RUN pip install virtualenv
+# Install virtual env an aws cli
+RUN pip install virtualenv awscli
 
 # Install Node. At the moment we aren't concerned w/ versioning node
 # since we only use it for client asset building
