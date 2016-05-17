@@ -14,7 +14,7 @@ RUN \
     echo 'deb https://apt.dockerproject.org/repo debian-jessie main' | tee /etc/apt/sources.list.d/docker.list && \
     apt-get update && \
     apt-cache policy docker-engine && \
-    apt-get install -y docker-engine && \
+    apt-get install -y docker-engine=1.9.1-0~jessie && \
     gpasswd -a jenkins docker
 
 # Install Google Cloud SDK
