@@ -24,6 +24,4 @@ RUN \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     apt-get update && \
     apt-get install -y google-cloud-sdk
-    
-# Switch Back to jenkins
-# USER jenkins
+RUN gcloud components install kubectl
