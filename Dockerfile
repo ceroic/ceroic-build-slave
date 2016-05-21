@@ -18,10 +18,14 @@ RUN \
     gpasswd -a jenkins docker
 
 # Install Google Cloud SDK
-RUN apt-get install -y lsb-release
-RUN \
-    echo "deb http://packages.cloud.google.com/apt cloud-sdk-$(lsb_release -c -s) main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update && \
-    apt-get install -y google-cloud-sdk
-RUN gcloud components install kubectl
+RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-110.0.0-linux-x86_64.tar.gz | tar xz -C /opt
+RUN /opt/google-cloud-sdk/install.sh --quiet
+RUN /opt/google-cloud-sdk/bin/gcloud components install kubectl
+RUN echo 'PATH=$PATH:/opt/google-cloud-sdk/bin' >> /etc/profile
+# RUN apt-get install -y lsb-release
+# RUN \
+#     echo "deb http://packages.cloud.google.com/apt cloud-sdk-$(lsb_release -c -s) main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list && \
+#     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+#     apt-get update && \
+#     apt-get install -y google-cloud-sdk
+# RUN gcloud components install kubectl
