@@ -9,8 +9,6 @@ USER root
 
 # Install Docker
 RUN \
-    # apt-get purge lxc-docker* && \
-    # apt-get purge docker.io* && \
     apt-get update && \
     apt-get install -y apt-transport-https ca-certificates && \
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
@@ -25,3 +23,7 @@ RUN apt-get update -y
 RUN apt-get install -y jq
 RUN curl https://sdk.cloud.google.com | bash && mv google-cloud-sdk /opt
 RUN gcloud components install kubectl
+
+# Install helm
+RUN curl -s https://get.helm.sh | bash
+RUN mv helmc /usr/bin
