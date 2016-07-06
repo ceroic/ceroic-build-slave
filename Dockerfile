@@ -25,5 +25,6 @@ RUN curl https://sdk.cloud.google.com | bash && mv google-cloud-sdk /opt
 RUN gcloud components install kubectl
 
 # Install helm
-RUN curl -s https://get.helm.sh | bash
-RUN mv helmc /usr/bin
+ADD https://storage.googleapis.com/helm-classic/helmc-latest-linux-amd64 helmc
+RUN mv helmc /usr/bin/
+RUN chmod +x /usr/bin/helmc
