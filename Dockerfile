@@ -18,13 +18,14 @@ RUN \
     apt-get install -y docker-engine=1.9.1-0~jessie && \
     gpasswd -a jenkins docker
 
+# Install Node
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get install -y nodejs
+
 # Install Google Cloud SDK
 RUN apt-get update -y
 RUN apt-get install -y jq
 RUN curl https://sdk.cloud.google.com | bash && mv google-cloud-sdk /opt
 RUN gcloud components install kubectl
 
-# Install helm
-ADD https://storage.googleapis.com/helm-classic/helmc-latest-linux-amd64 helmc
-RUN mv helmc /usr/bin/
-RUN chmod +x /usr/bin/helmc
+
