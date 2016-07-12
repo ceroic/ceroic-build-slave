@@ -7,20 +7,19 @@ ENV PATH /opt/google-cloud-sdk/bin:$PATH
 # Base image sets user to jenkins, switch back to root for this.
 USER root
 
-# Install Docker
+# Install Node
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+
+# Install Docker and other dependencies
 RUN \
     apt-get update && \
-    apt-get install -y apt-transport-https ca-certificates && \
+    apt-get install -y apt-transport-https ca-certificates bzip2 nodejs && \
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
     echo 'deb https://apt.dockerproject.org/repo debian-jessie main' | tee /etc/apt/sources.list.d/docker.list && \
     apt-get update && \
     apt-cache policy docker-engine && \
     apt-get install -y docker-engine=1.9.1-0~jessie && \
     gpasswd -a jenkins docker
-
-# Install Node
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs
 
 # Install Google Cloud SDK
 RUN apt-get update -y
