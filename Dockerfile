@@ -13,7 +13,17 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 # Install Docker and other dependencies
 RUN \
     apt-get update && \
-    apt-get install -y apt-transport-https ca-certificates bzip2 nodejs && \
+    apt-get install -y \
+        apt-transport-https \
+        build-essential \
+        bzip2 \
+        ca-certificates \
+        libssl-dev \
+        nodejs \
+        python-dev \
+        python-setuptools && \
+    easy_install pip && \
+    pip install ansible apache-libcloud && \
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
     echo 'deb https://apt.dockerproject.org/repo debian-jessie main' | tee /etc/apt/sources.list.d/docker.list && \
     apt-get update && \
